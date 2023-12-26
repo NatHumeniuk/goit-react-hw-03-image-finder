@@ -9,6 +9,10 @@ export class Searchbar extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const searchValue = e.currentTarget.elements.searchInput.value;
+    if (!searchValue) {
+      alert('Please enter a search query');
+      return;
+    }
     this.setState({ query: searchValue });
     this.props.onSubmit(this.state.query);
   };

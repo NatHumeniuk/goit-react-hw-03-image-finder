@@ -42,10 +42,6 @@ export class App extends Component {
   }
 
   handleSubmit = searchValue => {
-    if (!searchValue) {
-      alert('Please enter a search query');
-      return;
-    }
     this.setState({ searchQuery: searchValue, page: 1 });
   };
 
@@ -54,6 +50,7 @@ export class App extends Component {
       page: prevState.page + 1,
     }));
   };
+
   handleShowModal = imageId => {
     const selectedImage = this.state.images.find(image => image.id === imageId);
     this.setState({
@@ -61,6 +58,7 @@ export class App extends Component {
       modalData: selectedImage,
     });
   };
+
   handleCloseModal = () => {
     this.setState({ isOpenModal: false });
   };
