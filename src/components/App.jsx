@@ -19,7 +19,7 @@ export class App extends Component {
 
   fetchImagesByQuery = async (searchQuery, page = 1) => {
     try {
-      this.setState({ status: 'pending' });
+      // this.setState({ status: 'pending' });
       const data = await requestImagesByQuery(searchQuery, page);
       const { hits, totalHits } = data;
       this.setState(prevState => ({
@@ -33,6 +33,13 @@ export class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
+    if (prevState.page < this.state.page && this.state.status === 'success') {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+
     if (
       prevState.searchQuery !== this.state.searchQuery ||
       prevState.page !== this.state.page
@@ -48,6 +55,7 @@ export class App extends Component {
   handleLoadMore = () => {
     this.setState(prevState => ({
       page: prevState.page + 1,
+      status: 'pending',
     }));
   };
 
