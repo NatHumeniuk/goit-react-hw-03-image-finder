@@ -33,9 +33,9 @@ export class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.page < this.state.page && this.state.status === 'success') {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
+    if (this.state.status === 'success') {
+      window.scroll({
+        top: (0, document.documentElement.scrollHeight),
         behavior: 'smooth',
       });
     }
